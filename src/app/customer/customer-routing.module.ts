@@ -7,6 +7,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CanActivateGuard } from './guards/can-activate.guard';
 import { CanDeactivateGuard } from './guards/can-deactivate.guard';
+import { CustomerOrderEditComponent } from './customer-order-edit/customer-order-edit.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,11 @@ const routes: Routes = [
         component: CustomerEditComponent,
         canActivate: [CanActivateGuard],
         canDeactivate: [CanDeactivateGuard]
+      },
+      {
+        path: 'order-edit',
+        component: CustomerOrderEditComponent,
+        canActivate: [CanActivateGuard]
       }
     ]
   }

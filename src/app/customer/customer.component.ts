@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'cm-orders',
@@ -10,9 +10,11 @@ export class CustomerComponent implements OnInit {
     // displayMode: CustomerDisplayModeEnum;
     // displayModeEnum = CustomerDisplayModeEnum;
 
-    constructor(private router: Router) { }
+    allowAddOrder: boolean = false;
 
-    ngOnInit() {
+    constructor(private route: ActivatedRoute) { }
+
+    ngOnInit(): void {
 
       // No longer needed due to routerLinkActive feature in Angular
       // const path = this.router.url.split('/')[3];
@@ -27,6 +29,16 @@ export class CustomerComponent implements OnInit {
       //     this.displayMode = CustomerDisplayModeEnum.Edit;
       //     break;
       // }
+
+      this.route.parent.params.subscribe((params: Params) => {
+        const id = +params['id'];
+        if (id !== 0) {
+          this.allowAddOrder = true;
+        } else {
+          this.allowAddOrder = false;
+        }
+      });
+
     }
 
 }
