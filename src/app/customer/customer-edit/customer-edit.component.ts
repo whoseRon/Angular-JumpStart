@@ -64,6 +64,7 @@ export class CustomerEditComponent implements OnInit {
 
   submit() {
     if (this.customer.id === 0) {
+      this.customer.state.name = this.states.find(givenState => givenState.abbreviation === this.customer.state.abbreviation).name;
       this.dataService.insertCustomer(this.customer)
         .subscribe((insertedCustomer: ICustomer) => {
           if (insertedCustomer) {

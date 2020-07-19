@@ -43,6 +43,8 @@ export class CustomerOrderEditComponent implements OnInit {
   }
 
   submit() {
+    if (!this.customer.orders)
+    this.customer.orders = [];
     this.customer.orders.push(this.order);
       this.dataService.updateCustomer(this.customer)
         .subscribe((status: boolean) => {
