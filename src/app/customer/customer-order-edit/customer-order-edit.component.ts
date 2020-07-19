@@ -29,7 +29,6 @@ export class CustomerOrderEditComponent implements OnInit {
     private route: ActivatedRoute,
     private dataService: DataService,
     private growler: GrowlerService,
-    private modalService: ModalService,
     private logger: LoggerService) { }
 
   ngOnInit(): void {

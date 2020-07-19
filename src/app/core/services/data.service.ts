@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ICustomer, IOrder, IState, IPagedResults, IApiResponse } from '../../shared/interfaces';
@@ -91,7 +91,7 @@ export class DataService {
             // Use the following instead if using lite-server
             // return Observable.throw(err.text() || 'backend server error');
         }
-        return Observable.throw(error || 'Node.js server error');
+        return throwError(error || 'Node.js server error');
     }
 
     calculateCustomersOrderTotal(customers: ICustomer[]) {
@@ -118,6 +118,6 @@ export class DataService {
     //         observer.complete();
     //     });
     // }
-    
+
 
 }
