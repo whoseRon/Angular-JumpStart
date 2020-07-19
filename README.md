@@ -1,3 +1,21 @@
+# BNYeX
+
+## Visit https://bny-ex.herokuapp.com/ to view the app
+
+This app is based on Dan Wahlin(s) project (https://github.com/DanWahlin/Angular-JumpStart),
+and some changes were introduced into it
+
+## To try the app locally simply follow Dan instructions below on how to Run the Application with Node.js
+Changes that were introduced in to this forked version of Dans code:
+* Behavior - a user can now add an order to is order list, which in trn will add up to toal users orders.
+* Fix to newly added user - state will now contain name as well as abbreviation, and empty orders array so that new orders can be associated with the user.
+* Unit tests - 2 unit tests were added to the new component named CustomerOrderEditComponent.
+* In order to run the tests, simply run `npm test` from project root
+
+
+
+
+#####################################################################################################
 # Angular JumpStart with TypeScript
 
 The goal of this jumpstart app is to provide
