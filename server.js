@@ -1,8 +1,8 @@
 "use strict";
 var express     = require('express'),
     bodyParser  = require('body-parser'),
-    fs          = require('fs'), 
-    app         = express(), 
+    fs          = require('fs'),
+    app         = express(),
     customers   = JSON.parse(fs.readFileSync('data/customers.json', 'utf-8')),
     states      = JSON.parse(fs.readFileSync('data/states.json', 'utf-8')),
     inContainer = process.env.CONTAINER,
@@ -22,14 +22,14 @@ app.use(function(req, res, next) {
 
 //The dist folder has our static resources (index.html, css, images)
 if (!inContainer) {
-    app.use(express.static(__dirname + '/dist')); 
-    console.log(__dirname);
+    app.use(express.static(__dirname + '/dist'));
+    console.log("dirname: ", __dirname);
 }
 
 app.get('/api/customers/page/:skip/:top', (req, res) => {
     const topVal = req.params.top,
           skipVal = req.params.skip,
-          skip = (isNaN(skipVal)) ? 0 : +skipVal;  
+          skip = (isNaN(skipVal)) ? 0 : +skipVal;
     let top = (isNaN(topVal)) ? 10 : skip + (+topVal);
 
     if (top > customers.length) {
@@ -57,7 +57,7 @@ app.get('/api/customers/:id', (req, res) => {
            selectedCustomer = customer;
            break;
         }
-    }  
+    }
     res.json(selectedCustomer);
 });
 
@@ -75,7 +75,7 @@ app.put('/api/customers/:id', (req, res) => {
     let id = +req.params.id;
     let status = false;
 
-    //Ensure state name is in sync with state abbreviation 
+    //Ensure state name is in sync with state abbreviation
     const filteredStates = states.filter((state) => state.abbreviation === putCustomer.state.abbreviation);
     if (filteredStates && filteredStates.length) {
         putCustomer.state.name = filteredStates[0].name;
@@ -99,7 +99,7 @@ app.delete('/api/customers/:id', function(req, res) {
            customers.splice(i,1);
            break;
         }
-    }  
+    }
     res.json({ status: true });
 });
 
@@ -127,24 +127,24 @@ app.post('/api/auth/logout', (req, res) => {
     res.json(true);
 });
 
-if (!inContainer) {
+// if (!inContainer) {
     // redirect all others to the index (HTML5 history)
     app.all('/*', function(req, res) {
         res.sendFile(__dirname + '/dist/index.html');
     });
-}
+// }
 
 app.listen(port);
 
 console.log('Express listening on port ' + port);
 
 //Open browser
-if (!inContainer && !inAzure) {
-    var opn = require('opn');
+// if (!inContainer && !inAzure) {
+//     var opn = require('opn');
 
-    opn('http://localhost:' + port).then(() => {
-        console.log('Browser closed.');
-    });
-}
+//     opn('http://localhost:' + port).then(() => {
+//         console.log('Browser closed.');
+//     });
+// }
 
 
