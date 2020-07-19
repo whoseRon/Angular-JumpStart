@@ -12,7 +12,7 @@
     "cypress": "concurrently \"npm start\" \"cypress open\"",
     "cypress:headless": "concurrently \"npm start\" \"cypress run\"",
     "playground": "angular-playground",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build"
   },
   "dependencies": {
     "@angular/animations": "~10.0.0",
